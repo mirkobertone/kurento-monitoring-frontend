@@ -10,6 +10,8 @@ export class MonitorService {
   serverInfo = this.socket.fromEvent<ServerInfoDTO>('serverInfo');
   pipelines = this.socket.fromEvent<PipelinesDTO>('pipelines');
 
+  error = this.socket.fromEvent<string>('app:error');
+
   constructor( private socket: Socket ) { }
 
   startMonitoring(url: string) {

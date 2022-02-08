@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { FormsModule } from '@angular/forms';
+import { MonitorCardComponent } from './components/monitor/monitor-card/monitor-card.component';
 const config: SocketIoConfig = { url: 'http://localhost:3333', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
-    MonitorComponent
+    MonitorComponent,
+    MonitorCardComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +21,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3333', options: {} };
     SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     MatSliderModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

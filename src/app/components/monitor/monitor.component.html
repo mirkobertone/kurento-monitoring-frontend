@@ -1,10 +1,20 @@
-<p>monitor works!</p>
-<mat-slider min="1" max="100" step="1" value="50"></mat-slider>
-
-
-<div>
-  <button class="start" (click)="start()">START</button>
-</div>
-<div>
-  <button class="stop" (click)="stop()">STOP</button>
+<div class="todos">
+	<form (submit)="startMonitoring()">
+		<input 
+			type="text"
+			name="inputTodo"
+			placeholder="Enter kurento url..."
+			class="todo-input"
+			[(ngModel)]="url"
+		/>
+		<input type="submit" value="Add" class="todo-submit" />
+	</form>
+  <button value="Add" class="todo-submit" (click)="log()">LOG</button>
+  <tbody>
+    <tr *ngFor="let c of connections">
+      <!-- <td>{{ c.serverInfo | json }}</td>
+      <td>{{ c.pipelines | json }}</td> -->
+      <app-monitor-card></app-monitor-card>
+    </tr>
+  </tbody>
 </div>
