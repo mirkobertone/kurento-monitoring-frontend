@@ -1,7 +1,7 @@
-import { Pipelines } from './pipelines.model';
+import { Pipeline } from './pipelines.model';
 
 describe('Pipelines', () => {
   it('should create an instance', () => {
-    expect(new Pipelines()).toBeTruthy();
+    expect(new Pipeline()).toBeTruthy();
   });
 });

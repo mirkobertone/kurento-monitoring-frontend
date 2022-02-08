@@ -1,9 +1,9 @@
 export class PipelinesDTO {
   url: string;
-  pipelines: Pipelines[]
+  pipelines: Pipeline[]
 }
 
-export class Pipelines {
+export class Pipeline {
   name: string;
   childrens: any;
   type: string;

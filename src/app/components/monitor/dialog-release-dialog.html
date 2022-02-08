@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Release pipeline {{ data.pipeline.id }}</h2>
+<mat-dialog-content class="mat-typography">
+ <p>Are you sure?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]=data cdkFocusInitial>Release</button>
+</mat-dialog-actions>

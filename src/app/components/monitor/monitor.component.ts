@@ -1,13 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, Pipe } from '@angular/core';
 import { Observable, pipe, Subscription } from 'rxjs';
 import { ServerInfo } from 'src/app/models/server-info.model';
-import { Pipelines } from 'src/app/models/pipelines.model';
+import { Pipeline } from 'src/app/models/pipelines.model';
 import { MonitorService } from 'src/app/services/monitor.service';
 import * as _ from 'lodash';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export interface DialogData {
+  pipeline: Pipeline
+}
+
 export class Info {
-  url?: string;
+  url: string;
   serverInfo?: ServerInfo;
-  pipelines?: Pipelines[];
+  pipelines?: Pipeline[];
 }
 @Component({
   selector: 'app-monitor',
@@ -15,14 +21,17 @@ export class Info {
   styleUrls: ['./monitor.component.scss']
 })
 export class MonitorComponent implements OnInit {
-
+  panelOpenState = false;
   error: string;
 
   connections: Array<Info> = [];
 
-  url:string = "";
+  inputUrl:string = "";
 
-  constructor( private monitorService: MonitorService ) {  }
+  constructor( 
+    private monitorService: MonitorService,
+    public dialog: MatDialog
+  ) {  }
   
   ngOnInit(): void {
     console.log("Monitor Component");
@@ -57,14 +66,13 @@ export class MonitorComponent implements OnInit {
   }
   
   startMonitoring() {
-    console.log(this.url);
-    
-    this.monitorService.startMonitoring(this.url);
+    console.log(this.inputUrl);
+    this.monitorService.startMonitoring(this.inputUrl);
+    this.inputUrl = "";
   }
 
 
   public checkByUrl(url: string, array: Array<any>): number {
-
     const index = array.map((e) => { return e.url; }).indexOf(url);
     return index;
   }
@@ -84,5 +92,40 @@ export class MonitorComponent implements OnInit {
     console.log(this.connections);
   }
   
+  remove(cToRemove: Info) {
+    this.monitorService.stopMonitoring(cToRemove.url)
+    _.remove(this.connections, c => c.url === cToRemove.url)
+  }
+
+
+  openDialog(pipeline: Pipeline): void {
+    const dialogRef = this.dialog.open(DialogReleaseDialog, {
+      width: '500px',
+      data: { pipeline },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('The dialog was closed', result);
+        
+      }
+    });
+  }
 
 }
+
+@Component({
+  selector: 'dialog-release-dialog',
+  templateUrl: 'dialog-release-dialog.html',
+})
+export class DialogReleaseDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogReleaseDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
