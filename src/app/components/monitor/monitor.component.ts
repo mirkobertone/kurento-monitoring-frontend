@@ -98,7 +98,7 @@ export class MonitorComponent implements OnInit {
   }
 
 
-  openDialog(pipeline: Pipeline): void {
+  openDialog(pipeline: Pipeline, url: string): void {
     const dialogRef = this.dialog.open(DialogReleaseDialog, {
       width: '500px',
       data: { pipeline },
@@ -106,8 +106,9 @@ export class MonitorComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        console.log('The dialog was closed', result);
-        
+        const ids = [];
+        ids.push(pipeline.id);
+        this.monitorService.releaseElements(url, ids);
       }
     });
   }

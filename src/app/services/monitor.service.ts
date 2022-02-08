@@ -21,4 +21,8 @@ export class MonitorService {
   stopMonitoring(url: string) {
     this.socket.emit("monitor:stop", { url })
   }
+
+  releaseElements(url: string, ids: string[]) {
+    this.socket.emit("kurento:release", {url, ids});
+  }
 }
