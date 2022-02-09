@@ -3,60 +3,50 @@
     <input type="text" name="inputUrl" placeholder="Enter kurento url..." class="todo-input" [(ngModel)]="inputUrl" />
     <input type="submit" value="Add" class="todo-submit" />
   </form>
-  <button value="Add" class="todo-submit" (click)="log()">LOG</button>
-
-
-
-  <tbody>
-    <tr *ngFor="let c of connections">
-      <!-- <td>{{ c.serverInfo | json }}</td>
-      <td>{{ c.pipelines | json }}</td> -->
-    
-      <mat-card>
-        <mat-card-title>{{ c.url }}</mat-card-title>
-        <mat-card-subtitle>Pipelines</mat-card-subtitle>
-
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Creation Time</th>
-        </tr>
-        <tbody>
-          <tr *ngFor="let p of c.pipelines">
-            <td>{{p.id}}</td>
-            <td>{{p.name}}</td>
-            <td>{{p.type}}</td>
-            <td>{{p.creationTime}}</td>
-            <td>
-              <button mat-button (click)="openDialog(p, c.url)">RELEASE</button>
-
-            </td>
-          </tr>
-        </tbody>
-        
-        <mat-card-actions>
-          <button mat-button (click)="remove(c)">STOP</button>
-        </mat-card-actions>
-      </mat-card>
-
-      <mat-card>
-        <mat-card-subtitle>Server Info</mat-card-subtitle>
-        <tr>
-          <th>Used Memory</th>
-          <th>Type</th>
-          <th>Version</th>
-        </tr>
-        <tbody>
-          <tr>
-            <td>{{c.serverInfo?.usedMemory}}</td>
-            <td>{{c.serverInfo?.type}}</td>
-            <td>{{c.serverInfo?.version}}</td>
-          </tr>
-        </tbody>
-      </mat-card>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
 </div>
+
+
+
+
+
+<mat-card *ngFor="let c of connections">
+  <mat-card-title>{{ c.url }}</mat-card-title>
+  <mat-card-subtitle>Pipelines</mat-card-subtitle>
+
+  <mat-expansion-panel *ngFor="let p of c.pipelines" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ p.id }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ p.name }}
+      </mat-panel-description>
+      <button mat-button (click)="openDialog(p, c.url)">RELEASE</button>
+    </mat-expansion-panel-header>
+    <p>This is the primary content of the panel.</p>
+    <!-- INIT CONTENT PANEL -->
+    <!-- CHILDREN -->
+    <!-- END CONTENT PANEL -->
+  </mat-expansion-panel>
+
+  <mat-card-actions>
+    <button mat-button (click)="remove(c)">STOP MONITOR</button>
+  </mat-card-actions>
+  <div>
+    <tr>
+      <th>Used Memory</th>
+      <th>Type</th>
+      <th>Version</th>
+      <th>Used CPU</th>
+    </tr>
+    <tbody>
+      <tr>
+        <td>{{c.serverInfo?.usedMemory}}</td>
+        <td>{{c.serverInfo?.type}}</td>
+        <td>{{c.serverInfo?.version}}</td>
+        <td>{{c.serverInfo?.usedCpu}}%</td>
+      </tr>
+    </tbody>
+
+  </div>
+</mat-card>
