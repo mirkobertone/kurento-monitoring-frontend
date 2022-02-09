@@ -13,7 +13,7 @@
   <mat-card-title>{{ c.url }}</mat-card-title>
   <mat-card-subtitle>Pipelines</mat-card-subtitle>
 
-  <mat-expansion-panel *ngFor="let p of c.pipelines" hideToggle>
+  <mat-expansion-panel *ngFor="let p of c.pipelines" [expanded]="getPanelState(p.id)" (opened)="panelSetOpenState(p.id)" (closed)="panelSetCloseState(p.id)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ p.id }}
@@ -23,9 +23,23 @@
       </mat-panel-description>
       <button mat-button (click)="openDialog(p, c.url)">RELEASE</button>
     </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
     <!-- INIT CONTENT PANEL -->
     <!-- CHILDREN -->
+    <mat-selection-list #children>
+      <mat-list-option *ngFor="let child of p.children">
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+        </tr>
+        <tbody>
+          <tr>
+            <td>{{child.name}}</td>
+            <td>{{child.type}}</td>
+          </tr>
+        </tbody>
+        <mat-divider></mat-divider>
+      </mat-list-option>
+    </mat-selection-list>
     <!-- END CONTENT PANEL -->
   </mat-expansion-panel>
 

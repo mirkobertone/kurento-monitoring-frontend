@@ -21,7 +21,7 @@ export class Info {
   styleUrls: ['./monitor.component.scss']
 })
 export class MonitorComponent implements OnInit {
-  panelOpenState = false;
+  panelOpenState: {[pipeline_id:string]: boolean} = {};
   error: string;
 
   connections: Array<Info> = [];
@@ -88,10 +88,22 @@ export class MonitorComponent implements OnInit {
   //   this.serverInfoSub.unsubscribe();
   // }
 
-  log() {
-    console.log(this.connections);
+  log(e: any) {
+    console.log("HELLO", e);
   }
-  
+
+  getPanelState(pipeline_id: string) {
+    return this.panelOpenState[pipeline_id];
+  }
+
+  panelSetOpenState(pipeline_id: string) {
+    this.panelOpenState[pipeline_id] = true;
+  }
+
+  panelSetCloseState(pipeline_id: string) {
+    this.panelOpenState[pipeline_id] = false;
+
+  } 
   remove(cToRemove: Info) {
     this.monitorService.stopMonitoring(cToRemove.url)
     _.remove(this.connections, c => c.url === cToRemove.url)

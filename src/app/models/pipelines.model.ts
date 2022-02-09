@@ -5,7 +5,7 @@ export class PipelinesDTO {
 
 export class Pipeline {
   name: string;
-  childrens: any;
+  children: any;
   type: string;
   creationTime: Date;
   id: string;
