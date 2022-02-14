@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "dc:up": "docker-compose up --build -d",
+    "dc:down": "docker-compose down --remove-orphans"
   },
   "private": true,
   "dependencies": {

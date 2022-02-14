@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: .
+    container_name: kms-monitor-frontend
+    ports: 
+      - "4200:4200"
+    volumes:
+      - /app/node_modules
+      - .:/app
