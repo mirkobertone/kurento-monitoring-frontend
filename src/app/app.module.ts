@@ -14,8 +14,9 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';  
+import { environment } from 'src/environments/environment';
 
-const config: SocketIoConfig = { url: 'http://localhost:3333', options: {} };
+const config: SocketIoConfig = { url: environment.socketUri, options: {} };
 @NgModule({
   declarations: [
     AppComponent,
