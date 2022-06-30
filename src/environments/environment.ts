@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  socketUri: "http://localhost:3333"
+  // socketUri: "http://localhost:3333"
+  socketUri: 'http://34.252.25.145:3333'
 };
 
 /*

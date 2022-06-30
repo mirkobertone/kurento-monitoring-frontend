@@ -1,11 +1,14 @@
 version: '3.7'
 services:
-  web:
+  kurento-monitoring:
+    image: kurento-monitoring-frontend
     build:
       context: .
-    container_name: kms-monitor-frontend
+    container_name: kurento-monitoring-frontend
     ports: 
-      - "4200:4200"
-    volumes:
-      - /app/node_modules
-      - .:/app
+      - 4200:80
+    networks:
+      - internal
+
+networks:
+  internal:

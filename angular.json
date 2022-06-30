@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-kms-monitor": {
+    "kurento-monitoring-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-kms-monitor",
+            "outputPath": "dist/kurento-monitoring-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-kms-monitor:build:production"
+              "browserTarget": "kurento-monitoring-frontend:build:production"
             },
             "development": {
-              "browserTarget": "angular-kms-monitor:build:development"
+              "browserTarget": "kurento-monitoring-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-kms-monitor:build"
+            "browserTarget": "kurento-monitoring-frontend:build"
           }
         },
         "test": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "angular-kms-monitor"
+  "defaultProject": "kurento-monitoring-frontend"
 }
